@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="Mediator.SourceGenerator" Version="2.1.7">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Mediator.Abstractions" Version="2.1.7" />
+		<PackageReference Include="Microsoft.OpenApi" Version="1.2.3" />
+		<PackageReference Include="Validot" Version="2.5.0" />
+		<PackageReference Include="Ardalis.GuardClauses" Version="4.5.0" />
+		<PackageReference Include="RabbitMQ.Client" Version="6.8.1" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstraction\Commands\" />
+    <Folder Include="Abstraction\Queries\" />
+    <Folder Include="Validator\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AccountMgt.Models\AccountMgt.Models.csproj" />
+  </ItemGroup>
+
+</Project>
