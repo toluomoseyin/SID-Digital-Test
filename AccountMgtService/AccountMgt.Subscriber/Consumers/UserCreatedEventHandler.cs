@@ -6,7 +6,6 @@ using MassTransit;
 
 namespace AccountMgt.Subscriber.Consumers
 {
-
     public class UserCreatedEventHandler : IConsumer<UserCreatedEvent>
     {
         private readonly IAccountRepository _accountRepository;

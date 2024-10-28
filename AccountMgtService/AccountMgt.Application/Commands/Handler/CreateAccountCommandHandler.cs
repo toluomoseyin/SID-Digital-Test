@@ -5,7 +5,6 @@ using AccountMgt.Application.Messages;
 using AccountMgt.Models.Enums;
 using AccountMgt.Models.Events;
 using AccountMgt.Models.Models;
-using AccountMgt.Application.DTOs;
 using Ardalis.GuardClauses;
 using MassTransit;
 using Mediator;
@@ -45,7 +44,7 @@ namespace AccountMgt.Application.Commands.Handler
                 // from Usermangement service
                 // using the provided UserId
                 user = await _userServiceClient
-                    .GetUserByIdAsync(command.Data.UserId);
+                    .GetUserByIdAsync(command.UserId);
             }
             catch (Exception ex)
             {
@@ -57,7 +56,7 @@ namespace AccountMgt.Application.Commands.Handler
             var account = new Account
             {
                 AccountNumber = Guid.NewGuid().ToString(),
-                UserId = command.Data.UserId,
+                UserId = command.UserId,
                 Name = user.FullName,
                 Email = user.Email,
                 Type = command.Data.AccountType,
@@ -78,7 +77,7 @@ namespace AccountMgt.Application.Commands.Handler
                     AccountName = account.Name,
                     AccountNumber = account.AccountNumber,
                     AccountType = command.Data.AccountType,
-                    UserId = command.Data.UserId,
+                    UserId = command.UserId,
                 });
 
                 var responseData = new CreateAccountResponse
