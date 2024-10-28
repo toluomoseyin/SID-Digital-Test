@@ -4,7 +4,6 @@ using AccountMgt.Infrastructure.Database.Repositories;
 using AccountMgt.Infrastructure.Jobs;
 using AccountMgt.Infrastructure.Options;
 using AccountMgt.Infrastructure.Services;
-using Microsoft.Extensions.Caching.Memory;
 using Polly;
 using Polly.Extensions.Http;
 
@@ -25,9 +24,7 @@ namespace AccountMgt.API.Configuration
             services.Configure<TokenOptions>(configuration.GetSection("Jwt"));
             services.Configure<RateLimitingOption>(configuration
                 .GetSection("RateLimitingOption"));
-
-            // Add other services here
-            services.AddSingleton<IRateLimiterService,RateLimiterService>();
+            services.AddSingleton<IRateLimiterService, RateLimiterService>();
 
             services.AddScoped<IReportGenerator, LinqReportGeneratorRepository>();
             services.AddScoped<IPdfReportService, PdfReportService>();

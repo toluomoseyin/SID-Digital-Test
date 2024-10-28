@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AccountMgt.Application.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
@@ -34,7 +35,11 @@ namespace AccountMgt.Application.Middlewares
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = 500;
-            var dataResponse = new { status = false, Messgage = "Generic error occurred on server. Check logs for more info." };
+            var dataResponse = new InternalServerError
+            { 
+                Status = false, 
+                ErrorMessage = "Generic error occurred on server. Check logs for more info."
+            };
             await context.Response.WriteAsync(JsonSerializer.Serialize(dataResponse));
         }
 

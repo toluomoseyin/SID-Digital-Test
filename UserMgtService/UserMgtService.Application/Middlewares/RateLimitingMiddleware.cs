@@ -30,7 +30,7 @@ namespace UserMgtService.Application.Middlewares
             {
                 _logger.LogInformation("Rate limit exceeded for key: {RateLimitKey}", rateLimitKey);
                 context.Response.StatusCode = StatusCodes.Status429TooManyRequests;
-                context.Response.Headers["Retry-After"] = "60"; // Retry after 60 seconds
+                context.Response.Headers["Retry-After"] = "60";
                 await context.Response.WriteAsync("Rate limit exceeded. Try again later.");
                 return;
             }

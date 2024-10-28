@@ -1,3 +1,5 @@
+using AccountMgt.Application.Abstraction.Repositories;
+using AccountMgt.Infrastructure.Database.Repositories;
 using AccountMgt.Subscriber.Consumers;
 using AccountMgt.Subscriber.Extensions;
 using MassTransit;
@@ -15,6 +17,7 @@ builder.Services.AddMassTransitRabbitMq(builder.Configuration,
         e.UseMessageRetry(r => r.Interval(5, TimeSpan.FromSeconds(10)));
     }));
 
+builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 var app = builder.Build();
 
 

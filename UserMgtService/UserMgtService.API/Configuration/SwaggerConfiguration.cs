@@ -1,18 +1,23 @@
 ﻿using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace UserMgtService.API.Configuration
 {
     public static class SwaggerConfiguration
     {
         private static readonly string _bearer = "Bearer";
-        private static readonly string _version = "v1";
+        private static readonly string _version = "v2";
         public static IServiceCollection ConfigureSwagger(this IServiceCollection serviceCollection)
         {
             return serviceCollection.AddSwaggerGen(options =>
             {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "User Management API", Version = "v1" });
                 options.SwaggerDoc(_version, CreateInfo());
                 options.AddSecurityDefinition(_bearer, CreateScheme());
                 options.AddSecurityRequirement(CreateRequirement());
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
         }
 
